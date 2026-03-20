@@ -58,6 +58,8 @@ def get_stories(
 ):
     json_data = _fetch_data(username, timeout)
     user_info = snapchat_service.get_user_info(json_data)
+    if user_info.get("error"):
+        raise HTTPException(status_code=404, detail=user_info["error"])
     if user_info.get("is_private"):
         raise HTTPException(status_code=403, detail="User is private. Stories are not available.")
     stories = snapchat_service.get_stories(json_data)
@@ -77,6 +79,8 @@ def get_highlights(
 ):
     json_data = _fetch_data(username, timeout)
     user_info = snapchat_service.get_user_info(json_data)
+    if user_info.get("error"):
+        raise HTTPException(status_code=404, detail=user_info["error"])
     if user_info.get("is_private"):
         raise HTTPException(status_code=403, detail="User is private. Highlights are not available.")
     highlights = snapchat_service.get_curated_highlights(json_data)
@@ -96,6 +100,8 @@ def get_spotlights(
 ):
     json_data = _fetch_data(username, timeout)
     user_info = snapchat_service.get_user_info(json_data)
+    if user_info.get("error"):
+        raise HTTPException(status_code=404, detail=user_info["error"])
     if user_info.get("is_private"):
         raise HTTPException(status_code=403, detail="User is private. Spotlights are not available.")
     spotlight_data = snapchat_service.get_spotlights(json_data)
@@ -122,6 +128,8 @@ def get_lenses(
 ):
     json_data = _fetch_data(username, timeout)
     user_info = snapchat_service.get_user_info(json_data)
+    if user_info.get("error"):
+        raise HTTPException(status_code=404, detail=user_info["error"])
     if user_info.get("is_private"):
         raise HTTPException(status_code=403, detail="User is private. Lenses are not available.")
     lenses = snapchat_service.get_lenses(json_data)
@@ -142,6 +150,8 @@ def get_bitmojis(
 ):
     json_data = _fetch_data(username, timeout)
     user_info = snapchat_service.get_user_info(json_data)
+    if user_info.get("error"):
+        raise HTTPException(status_code=404, detail=user_info["error"])
     if not user_info.get("is_private"):
         raise HTTPException(status_code=400, detail="Bitmoji endpoint is only available for private users.")
     bitmojis = snapchat_service.get_bitmojis(json_data, timeout, threads)
@@ -161,6 +171,8 @@ def get_stats(
 ):
     json_data = _fetch_data(username, timeout)
     user_info = snapchat_service.get_user_info(json_data)
+    if user_info.get("error"):
+        raise HTTPException(status_code=404, detail=user_info["error"])
     if user_info.get("is_private"):
         raise HTTPException(status_code=403, detail="User is private. Stats are not available.")
     stats = snapchat_service.get_stats(json_data)
@@ -180,6 +192,8 @@ def get_heatmap(
 ):
     json_data = _fetch_data(username, timeout)
     user_info = snapchat_service.get_user_info(json_data)
+    if user_info.get("error"):
+        raise HTTPException(status_code=404, detail=user_info["error"])
     if user_info.get("is_private"):
         raise HTTPException(status_code=403, detail="User is private. Heatmap data is not available.")
     heatmap_data = snapchat_service.get_heatmap_data(json_data)
