@@ -61,7 +61,7 @@ def get_stories(
     if user_info.get("is_private"):
         raise HTTPException(status_code=403, detail="User is private. Stories are not available.")
     stories = snapchat_service.get_stories(json_data)
-    return {"username": username, "total_stories": len(stories), "stories": stories}
+    return {"username": username, "user_info": user_info, "total_stories": len(stories), "stories": stories}
 
 
 @router.get(
@@ -80,7 +80,7 @@ def get_highlights(
     if user_info.get("is_private"):
         raise HTTPException(status_code=403, detail="User is private. Highlights are not available.")
     highlights = snapchat_service.get_curated_highlights(json_data)
-    return {"username": username, "total_highlights": len(highlights), "highlights": highlights}
+    return {"username": username, "user_info": user_info, "total_highlights": len(highlights), "highlights": highlights}
 
 
 @router.get(
@@ -101,6 +101,7 @@ def get_spotlights(
     spotlight_data = snapchat_service.get_spotlights(json_data)
     return {
         "username": username,
+        "user_info": user_info,
         "total_spotlights": len(spotlight_data["spotlights"]),
         "total_engagement": spotlight_data["total_engagement"],
         "hashtag_rankings": spotlight_data["hashtag_rankings"],
@@ -124,7 +125,7 @@ def get_lenses(
     if user_info.get("is_private"):
         raise HTTPException(status_code=403, detail="User is private. Lenses are not available.")
     lenses = snapchat_service.get_lenses(json_data)
-    return {"username": username, "total_lenses": len(lenses), "lenses": lenses}
+    return {"username": username, "user_info": user_info, "total_lenses": len(lenses), "lenses": lenses}
 
 
 @router.get(
@@ -144,7 +145,7 @@ def get_bitmojis(
     if not user_info.get("is_private"):
         raise HTTPException(status_code=400, detail="Bitmoji endpoint is only available for private users.")
     bitmojis = snapchat_service.get_bitmojis(json_data, timeout, threads)
-    return {"username": username, "total_bitmojis": len(bitmojis), "bitmoji_hashes": bitmojis}
+    return {"username": username, "user_info": user_info, "total_bitmojis": len(bitmojis), "bitmoji_hashes": bitmojis}
 
 
 @router.get(
@@ -163,7 +164,7 @@ def get_stats(
     if user_info.get("is_private"):
         raise HTTPException(status_code=403, detail="User is private. Stats are not available.")
     stats = snapchat_service.get_stats(json_data)
-    return {"username": username, "stats": stats}
+    return {"username": username, "user_info": user_info, "stats": stats}
 
 
 @router.get(
@@ -182,7 +183,7 @@ def get_heatmap(
     if user_info.get("is_private"):
         raise HTTPException(status_code=403, detail="User is private. Heatmap data is not available.")
     heatmap_data = snapchat_service.get_heatmap_data(json_data)
-    return {"username": username, "heatmap_data": heatmap_data}
+    return {"username": username, "user_info": user_info, "heatmap_data": heatmap_data}
 
 
 @router.get(

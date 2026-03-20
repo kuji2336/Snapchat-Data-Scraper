@@ -35,6 +35,7 @@ class Story(BaseModel):
 
 class StoriesResponse(BaseModel):
     username: str
+    user_info: UserInfo
     total_stories: int
     stories: List[Story]
 
@@ -53,6 +54,7 @@ class CuratedHighlight(BaseModel):
 
 class HighlightsResponse(BaseModel):
     username: str
+    user_info: UserInfo
     total_highlights: int
     highlights: List[CuratedHighlight]
 
@@ -80,6 +82,7 @@ class Spotlight(BaseModel):
 
 class SpotlightsResponse(BaseModel):
     username: str
+    user_info: Optional[UserInfo] = None
     total_spotlights: int
     total_engagement: int
     hashtag_rankings: List[HashtagRanking]
@@ -94,12 +97,14 @@ class Lens(BaseModel):
 
 class LensesResponse(BaseModel):
     username: str
+    user_info: UserInfo
     total_lenses: int
     lenses: List[Lens]
 
 
 class BitmojisResponse(BaseModel):
     username: str
+    user_info: UserInfo
     total_bitmojis: int
     bitmoji_hashes: List[str] = Field(default_factory=list, description="MD5 hashes of unique bitmoji versions")
 
@@ -119,6 +124,7 @@ class Stats(BaseModel):
 
 class StatsResponse(BaseModel):
     username: str
+    user_info: UserInfo
     stats: Stats
 
 
@@ -132,6 +138,7 @@ class HeatmapData(BaseModel):
 
 class HeatmapResponse(BaseModel):
     username: str
+    user_info: UserInfo
     heatmap_data: HeatmapData
 
 
