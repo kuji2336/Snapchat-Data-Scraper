@@ -1,0 +1,11 @@
+requests
+argparse
+datetime
+pandas
+numpy
+seaborn
+matplotlib
+colorama
+python-dotenv
+fastapi
+uvicorn[standard]

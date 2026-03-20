@@ -9,3 +9,6 @@ venv/
 # Build artifacts
 build/
 *.egg-info/
+
+# Environment variables
+.env

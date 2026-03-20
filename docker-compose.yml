@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: snapintel-lb
+    ports:
+      - "8000:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - snapintel-api-1
+      - snapintel-api-2
+      - snapintel-api-3
+    restart: unless-stopped
+
+  snapintel-api-1:
+    build: .
+    container_name: snapintel-api-1
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - INSTANCE_ID=1
+    restart: unless-stopped
+
+  snapintel-api-2:
+    build: .
+    container_name: snapintel-api-2
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - INSTANCE_ID=2
+    restart: unless-stopped
+
+  snapintel-api-3:
+    build: .
+    container_name: snapintel-api-3
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - INSTANCE_ID=3
+    restart: unless-stopped
